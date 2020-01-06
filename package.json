@@ -1,0 +1,65 @@
+{
+  "name": "@jaysalvat/x-app",
+  "version": "0.0.1",
+  "description": "Smart in place JS templating engine. ",
+  "homepage": "http://jaysalvat.com",
+  "author": "Jay Salvat",
+  "license": "MIT",
+  "main": "dist/x-app.js",
+  "unpkg": "dist/x-app.min.js",
+  "public": true,
+  "scripts": {
+    "lint": "eslint 'src/*.js'",
+    "lint:fix": "eslint 'src/*.js' --fix",
+    "test": "mocha ./test --recursive",
+    "test:watch": "mocha ./test --recursive --watch",
+    "prewatch": "rm -rf ./dist",
+    "watch": "rollup -c --watch",
+    "prebuild": "git pull origin master && rm -rf ./dist",
+    "build": "rollup -c",
+    "postbuild": "npm test",
+    "version": "npm run build",
+    "version:patch": "npm version patch -m 'Bump to patch v%s'",
+    "version:minor": "npm version minor -m 'Bump to minor v%s'",
+    "version:major": "npm version major -m 'Bump to major v%s'",
+    "release:patch": "npm version patch -m 'Release patch v%s' && npm publish",
+    "release:minor": "npm version minor -m 'Release minor v%s' && npm publish",
+    "release:major": "npm version major -m 'Release major v%s' && npm publish",
+    "postpublish": "git push origin master --tags"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:fix",
+      "pre-push": "npm run lint:fix && npm test"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaysalvat/x-app.git"
+  },
+  "keywords": [
+    "template",
+    "virtual dom",
+    "dom"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@rollup/plugin-replace": "^2.2.1",
+    "babel-eslint": "^10.0.3",
+    "chai": "^4.2.0",
+    "eslint": "^6.7.0",
+    "husky": "^3.1.0",
+    "jsdom": "^15.2.1",
+    "mocha": "^6.2.2",
+    "rollup": "^1.27.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-filesize": "^6.2.1",
+    "rollup-plugin-terser": "^5.1.2"
+  },
+  "dependencies": {}
+}

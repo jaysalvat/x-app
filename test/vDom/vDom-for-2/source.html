@@ -1,0 +1,8 @@
+<ul id="template">
+  <li x-for="group in groups">
+    {{ group.name }}
+    <ul>
+      <li x-for="item in group.items">{{ item }}</li>
+    </ul>
+  </li>
+</ul>

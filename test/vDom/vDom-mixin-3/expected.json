@@ -1,0 +1,41 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {
+      "id": "template"
+  },
+  "children": [
+      {
+          "tagName": "BUTTON",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "group A"
+          ]
+      },
+      {
+          "tagName": "BUTTON",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "group B"
+          ]
+      },
+      {
+          "tagName": "BUTTON",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "group C"
+          ]
+      },
+      {
+          "tagName": "BUTTON",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "group D"
+          ]
+      }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {
+    "id": "template"
+  },
+  "children": [
+    {
+      "tagName": "UL",
+      "svg": false,
+      "attrs": {},
+      "children": [
+        {
+          "tagName": "LI",
+          "svg": false,
+          "attrs": {},
+          "children": [
+            {
+              "tagName": "STRONG",
+              "svg": false,
+              "attrs": {},
+              "children": [
+                "itemA"
+              ]
+            },
+            {
+              "tagName": "UL",
+              "svg": false,
+              "attrs": {},
+              "children": [
+                {
+                  "tagName": "LI",
+                  "svg": false,
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tagName": "STRONG",
+                      "svg": false,
+                      "attrs": {},
+                      "children": [
+                        "itemA1"
+                      ]
+                    },
+                    {
+                      "tagName": "UL",
+                      "svg": false,
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tagName": "STRONG",
+                              "svg": false,
+                              "attrs": {},
+                              "children": [
+                                "itemA1A"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tagName": "STRONG",
+                              "svg": false,
+                              "attrs": {},
+                              "children": [
+                                "itemA1B"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tagName": "STRONG",
+                              "svg": false,
+                              "attrs": {},
+                              "children": [
+                                "itemA1C"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tagName": "LI",
+          "svg": false,
+          "attrs": {},
+          "children": [
+            {
+              "tagName": "STRONG",
+              "svg": false,
+              "attrs": {},
+              "children": [
+                "itemB"
+              ]
+            },
+            {
+              "tagName": "UL",
+              "svg": false,
+              "attrs": {},
+              "children": [
+                {
+                  "tagName": "LI",
+                  "svg": false,
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tagName": "STRONG",
+                      "svg": false,
+                      "attrs": {},
+                      "children": [
+                        "itemB1"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "LI",
+                  "svg": false,
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tagName": "STRONG",
+                      "svg": false,
+                      "attrs": {},
+                      "children": [
+                        "itemB2"
+                      ]
+                    },
+                    {
+                      "tagName": "UL",
+                      "svg": false,
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tagName": "STRONG",
+                              "svg": false,
+                              "attrs": {},
+                              "children": [
+                                "itemB2A"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tagName": "STRONG",
+                              "svg": false,
+                              "attrs": {},
+                              "children": [
+                                "itemB2B"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tagName": "STRONG",
+                              "svg": false,
+                              "attrs": {},
+                              "children": [
+                                "itemB2C"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

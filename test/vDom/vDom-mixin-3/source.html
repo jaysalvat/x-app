@@ -1,0 +1,5 @@
+<div id="template">
+  <button x-mixin="mixin-button">{{ name }}</button>
+
+  <div x-for="group in groups" x-use="mixin-button with { 'name': group.name }"></div>
+</div>

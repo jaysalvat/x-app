@@ -1,0 +1,11 @@
+<div id="template">
+  <ul x-mixin="recursive">
+    <li x-for="item in items">
+      <div x-use="b with { 'name': item.name }">{{ item.name }}</div>
+      <ul x-if="item.children" x-use="recursive with { 'items': item.children }"></ul>
+    </li>
+  </ul>
+
+  <strong x-mixin="b">{{ name }}</strong>
+  <div x-use="recursive with { 'items': items }"></div>
+</div>

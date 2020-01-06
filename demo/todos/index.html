@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Xapp demo app: TodoMVX</title>
+  <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css@2.3.0/index.css">
+</head>
+<body>
+  <section class="todoapp" hidden>
+
+    <header class="header">
+      <h1>todos</h1>
+      <input class="new-todo" placeholder="What needs to be done?" autofocus onchange="app.addTask(event)">
+    </header>
+
+    <section class="main">
+      <input id="toggle-all" class="toggle-all" type="checkbox" onchange="app.toggleAllTasks()">
+      <label for="toggle-all">Mark all as complete</label>
+
+      <ul class="todo-list">
+        <li
+          x-for="task in filterTasks(filter)"
+          x-class="{ 'completed': task.done, 'editing': task.editing }">
+
+          <div class="view">
+            <input
+              x-attr="{ 'checked': task.done }"
+              class="toggle"
+              type="checkbox"
+              onchange="app.toggleTask(event)">
+
+            <label ondblclick="app.editTask(event)">
+              {{ task.name }}
+            </label>
+
+            <button class="destroy"
+              onclick="app.removeTask(event)">
+            </button>
+          </div>
+
+          <input
+            x-attr="{ 'value': task.name }"
+            class="edit"
+            autofocus
+            onkeyup="app.updateTask(event)">
+        </li>
+      </ul>
+    </section>
+
+    <footer class="footer" x-if="tasks.length">
+      <span class="todo-count">
+        <strong>{{ filterTasks(false).length }}</strong> item{{ filterTasks(false).length > 1 ? 's' : '' }} left
+      </span>
+
+      <ul class="filters">
+        <li>
+          <a x-class="{ 'selected': filter === null }" href="#/">All</a>
+        </li>
+        <li>
+          <a x-class="{ 'selected': filter === false }" href="#/active">Active</a>
+        </li>
+        <li>
+          <a x-class="{ 'selected': filter === true }" href="#/completed">Completed</a>
+        </li>
+      </ul>
+
+      <button class="clear-completed" onclick="app.clearDoneTasks(event)">Clear completed</button>
+    </footer>
+  </section>
+
+
+  <footer class="info">
+    <p>Double-click to edit a todo</p>
+
+    <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+    <p>Created by <a href="http://todomvc.com">Jay Salvat with XTemplate</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+  </footer>
+
+  <pre id="debug"></pre>
+
+  <script src="../../dist/x-app.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {},
+  "x": {},
+  "children": [
+    {
+      "tagName": "DIV",
+      "svg": false,
+      "attrs": {},
+      "x": {
+        "use": [
+          "mixin-name",
+          "{ 'name': 'hello' }"
+        ]
+      },
+      "children": []
+    }
+  ]
+}

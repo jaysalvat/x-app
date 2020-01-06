@@ -1,0 +1,17 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {},
+  "x": {},
+  "children": [
+    {
+      "tagName": "IMG",
+      "svg": false,
+      "attrs": {},
+      "x": {
+        "src": "path"
+      },
+      "children": []
+    }
+  ]
+}

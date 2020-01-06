@@ -1,0 +1,25 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {
+      "id": "template"
+  },
+  "children": [
+      {
+          "tagName": "BUTTON",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "one"
+          ]
+      },
+      {
+          "tagName": "BUTTON",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "two"
+          ]
+      }
+  ]
+}

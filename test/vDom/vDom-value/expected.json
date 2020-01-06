@@ -1,0 +1,17 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {
+      "id": "template"
+  },
+  "children": [
+      {
+          "tagName": "STRONG",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "value 1"
+          ]
+      }
+  ]
+}

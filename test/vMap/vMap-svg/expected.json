@@ -1,0 +1,40 @@
+{
+    "tagName": "svg",
+    "svg": true,
+    "attrs": {},
+    "x": {},
+    "children": [
+      {
+        "tagName": "path",
+        "x": {},
+        "svg": true,
+        "attrs": {
+          "d": {
+            "text": "M10 10",
+            "x": {}
+          }
+        },
+        "children": []
+      },
+      {
+        "tagName": "circle",
+        "x": {},
+        "svg": true,
+        "attrs": {
+          "cx": {
+            "text": "10",
+            "x": {}
+          },
+          "cy": {
+            "text": "10",
+            "x": {}
+          },
+          "r": {
+            "text": "2",
+            "x": {}
+          }
+        },
+        "children": []
+      }
+    ]
+}

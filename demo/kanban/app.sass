@@ -1,0 +1,110 @@
+$primary: deepskyblue
+$gray1: gray
+$gray2: lightgray
+$gray3: whitesmoke
+
+*
+  box-sizing: border-box
+
+body
+  background: $gray3
+  font: 1em sans-serif
+
+[contenteditable]
+  padding: 10px 5px
+  flex: 1
+  border: 2px dotted $gray3
+  cursor: default
+
+[contenteditable]:focus
+  background: lightyellow
+  border-style: dashed
+  outline: 1px solid $primary
+
+.columns
+  display: flex
+  flex-wrap: wrap
+
+.column
+  width: 400px
+  display: flex
+  flex-direction: column
+  background: white
+  min-height: 450px
+  margin: 10px
+  padding: 20px
+  border: 1px solid $gray3
+  background: white
+  box-shadow: 0 .25em .25em $gray2
+
+  i
+    color: $primary
+    margin: 0 5px
+
+  header
+    display: flex
+    align-items: center
+
+    i
+      color: $gray2
+      cursor: pointer
+
+      &:hover
+        color: $primary
+
+    &:hover i
+      color: $primary
+
+h2
+  margin: 0
+  display: flex
+  font-size: 20px
+
+.tasks
+  padding-bottom: 50px
+  list-style: none
+  border: 2px dashed $gray2
+  padding: 10px
+  margin: 10px 0 20px
+  height: 100%
+  padding-bottom: 75px
+
+.task
+  display: flex
+  align-items: center
+  padding: 10px 5px
+  border: 1px solid $gray2
+  background: white
+  box-shadow: 0 .25em .25em rgba($gray2, .5)
+  margin-bottom: 10px
+  cursor: move
+  font-size: 14px
+
+  i:last-child
+      color: $gray2
+      cursor: pointer
+
+      &:hover
+        color: $primary
+
+button
+  background: $primary
+  color: white
+  padding: 10px 15px
+  font-size: 10px
+  border: 0
+  text-transform: uppercase
+  border-radius: 4px
+
+nav button
+  position: fixed
+  bottom: 50px
+  right: 50px
+  border-radius: 50%
+  width: 75px
+  height: 75px
+  display: flex
+  align-items: center
+  justify-content: center
+  box-shadow: 0 .25em .25em $gray2
+  border: 1px solid white

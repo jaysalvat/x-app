@@ -1,0 +1,32 @@
+{
+  "tagName": "UL",
+  "svg": false,
+  "attrs": {},
+  "x": {},
+  "children": [
+    {
+      "tagName": "LI",
+      "svg": false,
+      "attrs": {},
+      "x": {},
+      "children": [
+        {
+          "text": "li1",
+          "x": {}
+        }
+      ]
+    },
+    {
+      "tagName": "LI",
+      "svg": false,
+      "attrs": {},
+      "x": {},
+      "children": [
+        {
+          "text": "li2",
+          "x": {}
+        }
+      ]
+    }
+  ]
+}

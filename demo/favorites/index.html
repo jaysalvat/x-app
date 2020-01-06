@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="app.css">
+    <title>Xapp demo app</title>
+</head>
+
+<body>
+  <div id="favorites">
+    <div class="favorites">
+      <div class="favorite" x-for="user in favorites" x-if="favorites.length">
+        <div class="favorite-avatar">
+          <img x-src="user.picture.large" alt="{{ user.name.first }}  {{ user.name.last }} }}">
+        </div>
+        <div class="favorite-name">
+          {{ user.name.first + ' ' + user.name.last | upper }}
+        </div>
+        <div class="favorite-remove">
+          <a onclick="removeFromFavorites(this)">
+            <i class="material-icons">close</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="users">
+    <div x-use="fetch-button"></div>
+
+    <div class="users loading" x-if="loading">
+      <div class="user" x-for="i in Array(9).fill(null)">
+          <div class="user-avatar">
+            <img />
+          </div>
+          <p class="user-name"></p>
+          <p class="user-location"></p>
+        </div>
+    </div>
+
+    <div class="users" x-if="!loading">
+      <div class="user" x-for="user in users">
+
+        <div class="user-avatar">
+          <img x-src="user.picture.large" x-attr="{ 'alt': user.name.first + ' ' + user.name.last }">
+        </div>
+        <p class="user-name">
+          {{ user.name.first + ' ' + user.name.last | upper }}
+        </p>
+        <p class="user-location">
+          {{ user.location.postcode }} {{ user.location.city }}
+        </p>
+        <div x-if="!user.favorited">
+          <a class="user-favorite" onclick="addToFavorites(this)">
+            <i class="material-icons">favorite_border</i>
+          </a>
+        </div>
+        <div x-if="user.favorited">
+          <a class="user-favorite" onclick="removeFromFavorites(this)">
+              <i class="material-icons">favorite</i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div x-use="fetch-button"></div>
+
+    <div x-mixin="fetch-button" class="buttons">
+      <button onclick="fetchUsers()">Fetch users</button>
+    </div>
+
+    <i x-mixin="icon" class="material-icons">{{ name }}</i>
+  </div>
+
+  <pre id="debug"></pre>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/redux@4.0.4/dist/redux.min.js"></script>
+  <script src="../../dist/x-app.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

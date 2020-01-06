@@ -1,0 +1,23 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {},
+  "x": {},
+  "children": [
+    {
+      "text": "hello {{ x1 }} {{ x2 }}" ,
+      "x": {
+        "x1": {
+          "original": "{{ value1 }}",
+          "pipes": [],
+          "value": "value1"
+        },
+        "x2": {
+          "original": "{{ value2 }}",
+          "pipes": [],
+          "value": "value2"
+        }
+      }
+    }
+  ]
+}

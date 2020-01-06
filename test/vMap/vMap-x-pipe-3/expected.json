@@ -1,0 +1,31 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {},
+  "x": {},
+  "children": [
+    {
+      "text": "{{ x1 }}" ,
+      "x": {
+        "x1": {
+          "original": "{{ value | pipe1 | pipe2(1, 2, 3) | pipe3 }}",
+          "value": "value",
+          "pipes": [
+            {
+              "name": "pipe1",
+              "args": "[]"
+            },
+            {
+              "name": "pipe2",
+              "args": "[1, 2, 3]"
+            },
+            {
+              "name": "pipe3",
+              "args": "[]"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

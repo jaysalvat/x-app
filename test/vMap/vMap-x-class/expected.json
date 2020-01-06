@@ -1,0 +1,10 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {},
+  "x": {},
+  "children": [],
+  "x": {
+    "class": "{ 'red': true }"
+  }
+}

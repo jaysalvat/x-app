@@ -1,0 +1,115 @@
+{
+  "tagName": "UL",
+  "svg": false,
+  "attrs": {
+      "id": "template"
+  },
+  "children": [
+      {
+          "tagName": "LI",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "group A",
+              {
+                  "tagName": "UL",
+                  "svg": false,
+                  "attrs": {},
+                  "children": [
+                      {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                              "A1"
+                          ]
+                      },
+                      {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                              "A2"
+                          ]
+                      },
+                      {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                              "A3"
+                          ]
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "tagName": "LI",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "group B",
+              {
+                  "tagName": "UL",
+                  "svg": false,
+                  "attrs": {},
+                  "children": [
+                      {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                              "B1"
+                          ]
+                      },
+                      {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                              "B2"
+                          ]
+                      },
+                      {
+                          "tagName": "LI",
+                          "svg": false,
+                          "attrs": {},
+                          "children": [
+                              "B3"
+                          ]
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "tagName": "LI",
+          "svg": false,
+          "attrs": {},
+          "children": [
+              "group C",
+              {
+                  "tagName": "UL",
+                  "svg": false,
+                  "attrs": {},
+                  "children": []
+              }
+          ]
+      },
+      {
+        "tagName": "LI",
+        "svg": false,
+        "attrs": {},
+        "children": [
+            "group D",
+            {
+                "tagName": "UL",
+                "svg": false,
+                "attrs": {},
+                "children": []
+            }
+        ]
+    }
+  ]
+}

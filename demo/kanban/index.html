@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="app.css">
+    <title>Xapp demo app</title>
+</head>
+
+<body>
+  <nav>
+    <button onclick="addColumn(event)">
+        <i class="material-icons">add</i>
+    </button>
+  </nav>
+
+  <div class="columns">
+    <div class="column"
+      x-attr="{ 'id': column.id }"
+      x-mixin="dropzone"
+      ondragover="dragover(event)"
+      ondrop="drop(event)">
+
+      <header>
+        <h2 contenteditable="true" placeholder="hello" spellcheck="false" onkeydown="updateColumn(event)">
+          {{ column.name }}
+        </h2>
+
+        <i onclick="deleteColumn(event)" class="material-icons">clear</i>
+      </header>
+
+      <ul class="tasks">
+        <li class="task"
+          draggable="true"
+          x-attr="{ 'id': task.id }"
+          x-for="task in column.tasks"
+          ondragstart="drag(event)">
+
+          <i class="material-icons">drag_indicator</i>
+
+          <span contenteditable="true" spellcheck="false" onkeydown="updateTask(event)">
+            {{ task.name }}
+          </span>
+
+          <i onclick="deleteTask(event)" class="material-icons">clear</i>
+        </li>
+      </ul>
+
+      <footer>
+        <button onclick="addTask(event)">
+          Add task
+        </button>
+      </footer>
+    </div>
+
+    <div
+      x-for="key in columns"
+      x-use="dropzone with { 'column': columns[key] }">
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/delegate@3.2.0/dist/delegate.js"></script>
+  <script src="../../dist/x-app.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "mixin-strong": {
+    "tagName": "STRONG",
+    "svg": false,
+    "attrs": {},
+    "x": {},
+    "children": [
+      {
+        "text": "hello",
+        "x": {}
+      }
+    ]
+  }
+}

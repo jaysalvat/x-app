@@ -1,0 +1,17 @@
+{
+  "tagName": "UL",
+  "svg": false,
+  "attrs": {},
+  "x": {},
+  "children": [
+    {
+      "tagName": "LI",
+      "svg": false,
+      "attrs": {},
+      "x": {
+        "for": [ "item", "items" ]
+      },
+      "children": []
+    }
+  ]
+}

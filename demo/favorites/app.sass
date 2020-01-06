@@ -1,0 +1,137 @@
+$primary: deepskyblue
+$gray1: gray
+$gray2: lightgray
+$gray3: whitesmoke
+
+*
+  box-sizing: border-box
+
+body
+  background: $gray3
+  font: 1em sans-serif
+
+#users, #favorites
+  display: none
+
+a
+  color: $primary
+  cursor: pointer
+
+button
+  appearance: none
+  background: $primary
+  color: white
+  padding: 1.5em 6em
+  border: 0
+  border-radius: 2em
+  text-transform: uppercase
+
+.favorites
+  position: fixed
+  top: 20px
+  right: 20px
+  width: 350px
+  font-size: 14px
+
+.favorite
+  display: flex
+  align-items: center
+  border-bottom: 1px solid $gray3
+  background: white
+  box-shadow: 0 .25em .25em $gray2
+  margin-bottom: .5em
+
+  & > *
+    padding: 10px
+
+  &-avatar img
+    width: 2em
+    height: 2em
+    border-radius: 50%
+    display: block
+    border: 1px solid $primary
+
+  &-name
+    flex: 1
+
+  &-remove i
+    font-size: 14px
+
+.users
+  flex-wrap: wrap
+  justify-content: center
+  display: flex
+  max-width: 960px
+  margin: auto
+
+.user
+  flex-basis: 30%
+  background: white
+  margin: 1em
+  padding: 2em
+  box-shadow: 0 .25em .5em $gray2
+  display: flex
+  flex-direction: column
+  align-items: center
+  height: 19em
+
+  &-avatar
+    width: 8em
+    height: 8em
+    border-radius: 50%
+    background: white
+    border: .25em solid white
+    box-shadow: 0 .25em .25em $gray2
+    overflow: hidden
+
+  &-avatar img
+    width: 100%
+    height: 100%
+
+  &-name
+    font-weight: bold
+
+  &-location
+    font-family: serif
+    color: #aaa
+    margin: 0
+
+  &-favorite
+    margin-top: 10px
+    display: block
+
+.buttons
+  display: flex
+  justify-content: center
+  align-content: center
+  margin: 1em
+
+.loading
+  .user-avatar img,
+  .user-name,
+  .user-location
+    box-shadow: none
+    background: $gray2
+    display: block
+    min-height: 1.5em
+    animation: fade 1s infinite
+    opacity: .2
+
+  .user-name
+    animation-delay: .1s
+    min-width: 65%
+    border-radius: 20px
+
+  .user-location
+    animation-delay: .2s
+    min-width: 45%
+    border-radius: 20px
+
+@keyframes fade
+  0%
+    opacity: 0.2
+  50%
+    opacity: .6
+  100%
+    opacity: 0.2
+

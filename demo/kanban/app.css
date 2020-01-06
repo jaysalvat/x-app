@@ -1,0 +1,154 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background: whitesmoke;
+  font: 1em sans-serif;
+}
+
+[contenteditable] {
+  padding: 10px 5px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: 2px dotted whitesmoke;
+  cursor: default;
+}
+
+[contenteditable]:focus {
+  background: lightyellow;
+  border-style: dashed;
+  outline: 1px solid deepskyblue;
+}
+
+.columns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.column {
+  width: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: white;
+  min-height: 450px;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid whitesmoke;
+  background: white;
+  -webkit-box-shadow: 0 0.25em 0.25em lightgray;
+          box-shadow: 0 0.25em 0.25em lightgray;
+}
+
+.column i {
+  color: deepskyblue;
+  margin: 0 5px;
+}
+
+.column header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.column header i {
+  color: lightgray;
+  cursor: pointer;
+}
+
+.column header i:hover {
+  color: deepskyblue;
+}
+
+.column header:hover i {
+  color: deepskyblue;
+}
+
+h2 {
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 20px;
+}
+
+.tasks {
+  padding-bottom: 50px;
+  list-style: none;
+  border: 2px dashed lightgray;
+  padding: 10px;
+  margin: 10px 0 20px;
+  height: 100%;
+  padding-bottom: 75px;
+}
+
+.task {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 5px;
+  border: 1px solid lightgray;
+  background: white;
+  -webkit-box-shadow: 0 0.25em 0.25em rgba(211, 211, 211, 0.5);
+          box-shadow: 0 0.25em 0.25em rgba(211, 211, 211, 0.5);
+  margin-bottom: 10px;
+  cursor: move;
+  font-size: 14px;
+}
+
+.task i:last-child {
+  color: lightgray;
+  cursor: pointer;
+}
+
+.task i:last-child:hover {
+  color: deepskyblue;
+}
+
+button {
+  background: deepskyblue;
+  color: white;
+  padding: 10px 15px;
+  font-size: 10px;
+  border: 0;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+nav button {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-shadow: 0 0.25em 0.25em lightgray;
+          box-shadow: 0 0.25em 0.25em lightgray;
+  border: 1px solid white;
+}
+/*# sourceMappingURL=app.css.map */

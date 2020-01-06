@@ -1,0 +1,34 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {
+      "id": "template"
+  },
+  "children": [
+      {
+          "tagName": "svg",
+          "svg": true,
+          "attrs": {},
+          "children": [
+            {
+              "tagName": "path",
+              "svg": true,
+              "attrs": {
+                "d": "M10 10"
+              },
+              "children": []
+            },
+            {
+              "tagName": "circle",
+              "svg": true,
+              "attrs": {
+                "cx": "10",
+                "cy": "10",
+                "r": "2"
+              },
+              "children": []
+            }
+          ]
+      }
+  ]
+}
