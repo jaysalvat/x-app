@@ -4,10 +4,12 @@
   "x": {},
   "attrs": {
     "attr1": {
+      "origin": "one",
       "text": "one",
       "x": {}
     },
     "attr2": {
+      "origin": "two",
       "text": "two",
       "x": {}
     }

@@ -269,7 +269,20 @@ export default class Xapp {
     // X-VERBATIM
 
     if (map.x.verbatim) {
-      verbatim = true;
+      verbatim = this.eval(map.x.verbatim, data);
+    }
+
+    // Replace tags in attributes used
+    // by following X-attributes
+
+    if (map.attrs) {
+      const attrs = {};
+
+      each(map.attrs, (attr, key) => {
+        attrs[key] = verbatim ? attr.origin : this.replaceTags(attr.text, data, attr.x);
+      });
+
+      map.attrs = attrs;
     }
 
     if (!verbatim && data) {
@@ -327,21 +340,6 @@ export default class Xapp {
         if (!this.eval(map.x.if, data)) {
           return;
         }
-      }
-
-      // Replace tags in attributes used
-      // by following X-attributes
-
-      if (map.attrs) {
-        const attrs = {};
-
-        each(map.attrs, (attr, key) => {
-          const { text, x } = attr;
-
-          attrs[key] = this.replaceTags(text, data, x);
-        });
-
-        map.attrs = attrs;
       }
 
       // X-HTML
@@ -417,7 +415,7 @@ export default class Xapp {
     // NODE
 
     if (map.text) {
-      vDom = verbatim ? '' : this.replaceTags(map.text, data, map.x);
+      vDom = verbatim ? map.text : this.replaceTags(map.text, data, map.x);
     } else if (map.tagName) {
       vDom.tagName = map.tagName;
       vDom.svg = map.svg;

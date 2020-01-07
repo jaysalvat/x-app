@@ -27,7 +27,7 @@ function createVDomMapElement(node) {
       if (attr.name.indexOf('x-') === 0) {
         switch (attr.name) {
           case 'x-verbatim':
-            x.verbatim = true;
+            x.verbatim = attr.value === '' ? 'true' : attr.value;
             break;
 
           case 'x-for':
@@ -59,6 +59,7 @@ function createVDomMapElement(node) {
         const meta = createMeta(attr.value);
 
         attrs[attr.name] = {
+          origin: attr.value,
           text: meta.text,
           x: meta.x
         };

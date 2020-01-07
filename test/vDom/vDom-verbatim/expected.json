@@ -18,11 +18,14 @@
       "svg": false,
       "attrs": {},
       "children": [
+        "{{ x2 }}",
         {
           "tagName": "SPAN",
           "svg": false,
           "attrs": {},
-          "children": []
+          "children": [
+            "{{ x3 }}"
+          ]
         }
       ]
     },
