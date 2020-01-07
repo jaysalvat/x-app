@@ -417,18 +417,14 @@ export default class Xapp {
     // NODE
 
     if (map.text) {
-      if (!verbatim) {
-        vDom = this.replaceTags(map.text, data, map.x);
-      } else {
-        vDom = map.text;
-      }
+      vDom = verbatim ? '' : this.replaceTags(map.text, data, map.x);
     } else if (map.tagName) {
       vDom.tagName = map.tagName;
       vDom.svg = map.svg;
       vDom.attrs = map.attrs || {};
       vDom.children = [];
 
-      // First Vdom with no data needs these attributes
+      // First vDom with no data needs these attributes
       // so they will be removed from the original DOM
       // on the first rendering
 

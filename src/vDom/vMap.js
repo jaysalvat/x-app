@@ -27,7 +27,6 @@ function createVDomMapElement(node) {
       if (attr.name.indexOf('x-') === 0) {
         switch (attr.name) {
           case 'x-verbatim':
-            node.removeAttribute('x-verbatim');
             x.verbatim = true;
             break;
 
@@ -40,14 +39,14 @@ function createVDomMapElement(node) {
             break;
 
           case 'x-include':
-            node.removeAttribute('x-include');
+            node.removeAttribute(attr.name);
             x.use = attr.value.split(/\s*with\s*/);
             mixins[x.use[0]] = createVDomMapElement(node);
             includes[x.use[0]] = false;
             break;
 
           case 'x-mixin':
-            node.removeAttribute('x-mixin');
+            node.removeAttribute(attr.name);
             mixins[attr.value] = createVDomMapElement(node);
             node.remove();
             doBreak = true;
@@ -114,7 +113,6 @@ function createMeta(text) {
     const { value, pipes } = parsePipes(tag);
 
     x[id] = {
-      original: all,
       value: value || tag,
       pipes: pipes || []
     };

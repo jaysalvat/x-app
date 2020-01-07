@@ -1,0 +1,38 @@
+{
+  "tagName": "DIV",
+  "svg": false,
+  "attrs": {
+    "id": "template"
+  },
+  "children": [
+    {
+      "tagName": "SPAN",
+      "svg": false,
+      "attrs": {},
+      "children": [
+        "value 1"
+      ]
+    },
+    {
+      "tagName": "SPAN",
+      "svg": false,
+      "attrs": {},
+      "children": [
+        {
+          "tagName": "SPAN",
+          "svg": false,
+          "attrs": {},
+          "children": []
+        }
+      ]
+    },
+    {
+      "tagName": "SPAN",
+      "svg": false,
+      "attrs": {},
+      "children": [
+        "value 2"
+      ]
+    }
+  ]
+}

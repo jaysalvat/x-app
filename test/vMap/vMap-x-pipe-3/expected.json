@@ -8,7 +8,6 @@
       "text": "{{ x1 }}" ,
       "x": {
         "x1": {
-          "original": "{{ value | pipe1 | pipe2(1, 2, 3) | pipe3 }}",
           "value": "value",
           "pipes": [
             {
