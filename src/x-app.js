@@ -455,6 +455,8 @@ export default class Xapp {
     if (!data) return string;
 
     return string.replace(RE_TAG, (_, tag) => {
+      if (!x[tag]) return string;
+
       const value = x[tag].value;
       const evalValue = this.eval(value, data);
 

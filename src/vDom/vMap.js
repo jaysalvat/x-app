@@ -1,4 +1,5 @@
 import each from '../utils/each';
+import extend from '../utils/extend';
 import { RE_TAG, RE_PIPE } from '../utils/constants';
 
 let tagCount;
@@ -15,7 +16,7 @@ function createVDomMap(node) {
   return { map, mixins, includes };
 }
 
-function createVDomMapElement(node) {
+function createVDomMapElement(node, verbatim = false) {
   const vDom = {};
 
   if (node.nodeType === 1) {
@@ -24,40 +25,44 @@ function createVDomMapElement(node) {
     let doBreak;
 
     each(node.attributes, (attr) => {
-      if (attr.name.indexOf('x-') === 0) {
-        switch (attr.name) {
+      if (attr.name === 'x-verbatim') {
+        verbatim = attr.value.toLowerCase() !== 'off';
+        node.removeAttribute(attr.name);
+      }
+    });
+
+    each(node.attributes, (attr) => {
+      const { name, value } = attr;
+
+      if (!verbatim && name.indexOf('x-') === 0) {
+        switch (name) {
           case 'x-for':
-            x.for = attr.value.split(/\s*in\s*/);
+            x.for = value.split(/\s*in\s*/);
             break;
 
           case 'x-use':
-            x.use = attr.value.split(/\s*with\s*/);
+            x.use = value.split(/\s*with\s*/);
             break;
 
           case 'x-include':
-            node.removeAttribute('x-include');
-            x.use = attr.value.split(/\s*with\s*/);
+            node.removeAttribute(name);
+            x.use = value.split(/\s*with\s*/);
             mixins[x.use[0]] = createVDomMapElement(node);
             includes[x.use[0]] = false;
             break;
 
           case 'x-mixin':
-            node.removeAttribute('x-mixin');
-            mixins[attr.value] = createVDomMapElement(node);
+            node.removeAttribute(name);
+            mixins[value] = createVDomMapElement(node);
             node.remove();
             doBreak = true;
             break;
 
           default:
-            x[attr.name.replace('x-', '')] = attr.value;
+            x[name.replace('x-', '')] = value;
         }
       } else {
-        const meta = createMeta(attr.value);
-
-        attrs[attr.name] = {
-          text: meta.text,
-          x: meta.x
-        };
+        attrs[name] = createMeta(value, verbatim);
       }
     });
 
@@ -68,7 +73,7 @@ function createVDomMapElement(node) {
     vDom.svg = node.ownerSVGElement !== undefined;
     vDom.x = x;
 
-    vDom.children = createVDomMapChildren(node);
+    vDom.children = createVDomMapChildren(node, verbatim);
 
     return vDom;
   }
@@ -77,21 +82,18 @@ function createVDomMapElement(node) {
     const text = node.nodeValue.replace(/^\s{1,}|\s{1,}$/g, ' ');
 
     if (text) {
-      const meta = createMeta(text);
-
-      vDom.text = meta.text;
-      vDom.x = meta.x;
+      extend(vDom, createMeta(text, verbatim));
     }
 
     return vDom;
   }
 }
 
-function createVDomMapChildren(element) {
+function createVDomMapChildren(element, verbatim = false) {
   const children = [];
 
   each(element.childNodes, (node) => {
-    const vDom = createVDomMapElement(node);
+    const vDom = createVDomMapElement(node, verbatim);
 
     if (vDom) {
       children.push(vDom);
@@ -101,20 +103,22 @@ function createVDomMapChildren(element) {
   return children;
 }
 
-function createMeta(text) {
+function createMeta(text, verbatim) {
   const x = {};
 
-  text = text.replace(RE_TAG, (all, tag) => {
-    const id = 'x' + tagCount++;
-    const { value, pipes } = parsePipes(tag);
+  if (!verbatim) {
+    text = text.replace(RE_TAG, (all, tag) => {
+      const id = 'x' + tagCount++;
+      const { value, pipes } = parsePipes(tag);
 
-    x[id] = {
-      value: value || tag,
-      pipes: pipes || []
-    };
+      x[id] = {
+        value: value || tag,
+        pipes: pipes || []
+      };
 
-    return `{{ ${id} }}`;
-  });
+      return `{{ ${id} }}`;
+    });
+  }
 
   return { x, text };
 }

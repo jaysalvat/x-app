@@ -18,13 +18,13 @@
       "svg": false,
       "attrs": {},
       "children": [
-        "{{ x2 }}",
+        "{{ var1 }}",
         {
           "tagName": "SPAN",
           "svg": false,
           "attrs": {},
           "children": [
-            "{{ x3 }}"
+            "{{ var2 }}"
           ]
         }
       ]
