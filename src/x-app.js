@@ -187,12 +187,16 @@ export default class Xapp {
   }
 
   show() {
+    if (this.shown) return;
+
     const $el = this.$el;
     const autoDisplay = this._settings.autoDisplay;
     const computed = window.getComputedStyle($el);
 
     if (autoDisplay && !this.isContainer) {
-      $el.hidden = false;
+      if ($el.hidden) {
+        $el.setAttribute('hidden', false);
+      }
 
       if (computed.display === 'none') {
         $el.style.display = autoDisplay === true ? 'block' : autoDisplay;
@@ -201,6 +205,8 @@ export default class Xapp {
       if (computed.visibility === 'hidden') {
         $el.style.visibility = 'visible';
       }
+
+      this.shown = true;
     }
   }
 
