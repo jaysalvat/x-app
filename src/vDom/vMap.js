@@ -26,21 +26,17 @@ function createVDomMapElement(node) {
     each(node.attributes, (attr) => {
       if (attr.name.indexOf('x-') === 0) {
         switch (attr.name) {
-          case 'x-verbatim':
-            x.verbatim = attr.value === '' ? 'true' : attr.value;
-            break;
-
           case 'x-for':
-            x.for = attr.value.split(/\s*in\s*/);
+            x.for = attr.value.split(/\s+in\s+/);
             break;
 
           case 'x-use':
-            x.use = attr.value.split(/\s*with\s*/);
+            x.use = attr.value.split(/\s+with\s+/);
             break;
 
           case 'x-include':
             node.removeAttribute(attr.name);
-            x.use = attr.value.split(/\s*with\s*/);
+            x.use = attr.value.split(/\s+with\s+/);
             mixins[x.use[0]] = createVDomMapElement(node);
             includes[x.use[0]] = false;
             break;
@@ -59,7 +55,6 @@ function createVDomMapElement(node) {
         const meta = createMeta(attr.value);
 
         attrs[attr.name] = {
-          origin: attr.value,
           text: meta.text,
           x: meta.x
         };
