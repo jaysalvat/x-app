@@ -8,54 +8,56 @@
 </head>
 
 <body>
-  <nav>
-    <button onclick="addColumn(event)">
-        <i class="material-icons">add</i>
-    </button>
-  </nav>
+  <div id="app" hidden>
+    <nav>
+      <button onclick="addColumn(event)">
+          <i class="material-icons">add</i>
+      </button>
+    </nav>
 
-  <div class="columns">
-    <div class="column"
-      x-attr="{ 'id': column.id }"
-      x-mixin="dropzone"
-      ondragover="dragover(event)"
-      ondrop="drop(event)">
+    <div class="columns">
+      <div class="column"
+        x-attr="{ 'id': column.id }"
+        x-mixin="dropzone"
+        ondragover="dragover(event)"
+        ondrop="drop(event)">
 
-      <header>
-        <h2 contenteditable="true" placeholder="hello" spellcheck="false" onkeydown="updateColumn(event)">
-          {{ column.name }}
-        </h2>
+        <header>
+          <h2 contenteditable="true" placeholder="hello" spellcheck="false" onkeydown="updateColumn(event)">
+            {{ column.name }}
+          </h2>
 
-        <i onclick="deleteColumn(event)" class="material-icons">clear</i>
-      </header>
+          <i onclick="deleteColumn(event)" class="material-icons">clear</i>
+        </header>
 
-      <ul class="tasks">
-        <li class="task"
-          draggable="true"
-          x-attr="{ 'id': task.id }"
-          x-for="task in column.tasks"
-          ondragstart="drag(event)">
+        <ul class="tasks">
+          <li class="task"
+            draggable="true"
+            x-attr="{ 'id': task.id }"
+            x-for="task in column.tasks"
+            ondragstart="drag(event)">
 
-          <i class="material-icons">drag_indicator</i>
+            <i class="material-icons">drag_indicator</i>
 
-          <span contenteditable="true" spellcheck="false" onkeydown="updateTask(event)">
-            {{ task.name }}
-          </span>
+            <span contenteditable="true" spellcheck="false" onkeydown="updateTask(event)">
+              {{ task.name }}
+            </span>
 
-          <i onclick="deleteTask(event)" class="material-icons">clear</i>
-        </li>
-      </ul>
+            <i onclick="deleteTask(event)" class="material-icons">clear</i>
+          </li>
+        </ul>
 
-      <footer>
-        <button onclick="addTask(event)">
-          Add task
-        </button>
-      </footer>
-    </div>
+        <footer>
+          <button onclick="addTask(event)">
+            Add task
+          </button>
+        </footer>
+      </div>
 
-    <div
-      x-for="key in columns"
-      x-use="dropzone with { 'column': columns[key] }">
+      <div
+        x-for="key in columns"
+        x-use="dropzone with { 'column': columns[key] }">
+      </div>
     </div>
   </div>
 

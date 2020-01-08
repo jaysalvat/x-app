@@ -31,7 +31,7 @@ const data = load() || {
   }
 };
 
-const xt = new Xapp();
+const xt = new Xapp('#app');
 xt.render(data);
 
 function addColumn(e) {
@@ -94,11 +94,16 @@ function updateField(e, $input, entity) {
   if (e.key === 'Enter') {
     entity.name = $input.innerText;
     $input.blur();
+    console.log('enter');
+
   }
   if (e.key === 'Escape') {
     $input.innerText = entity.name;
     $input.blur();
+    console.log('Escape');
   }
+  console.log(e.key);
+
   renderAndSave();
 }
 

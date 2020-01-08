@@ -89,7 +89,9 @@ export default class Xapp {
       } else {
         this.includes[fileName] = true;
       }
+
       const xhr = new XMLHttpRequest();
+
       xhr.open('GET', fileName, true);
       xhr.send();
       xhr.onreadystatechange = () => {
@@ -191,8 +193,8 @@ export default class Xapp {
     const autoDisplay = this._settings.autoDisplay;
     const computed = window.getComputedStyle($el);
 
-    if (autoDisplay && !this.isContainer) {
-      $el.hidden = false;
+    if (!this.shown && !this.isContainer && autoDisplay) {
+      delete this.vMap.attrs.hidden;
 
       if (computed.display === 'none') {
         $el.style.display = autoDisplay === true ? 'block' : autoDisplay;
@@ -201,6 +203,8 @@ export default class Xapp {
       if (computed.visibility === 'hidden') {
         $el.style.visibility = 'visible';
       }
+
+      this.shown = true;
     }
   }
 
@@ -236,7 +240,6 @@ export default class Xapp {
     this.$el = patch(this.$el);
 
     this.applyData(this.$el, newVDom);
-
     this.show();
     this.triggerEvent('after');
 
