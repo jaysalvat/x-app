@@ -24,46 +24,42 @@ function createVDomMapElement(node, verbatim = false) {
     let doBreak;
 
     each(node.attributes, (attr) => {
-      if (attr.name === 'x-verbatim') {
-        node.removeAttribute(attr.name);
-        verbatim = attr.value.toLowerCase() !== 'off';
-      }
-    });
+      if (attr.name.indexOf('x-') === 0) {
+        switch (attr.name) {
+          case 'x-verbatim':
+            x.verbatim = attr.value === '' ? 'true' : attr.value;
+            break;
 
-    each(node.attributes, (attr) => {
-      const { name, value } = attr;
-
-      if (!verbatim && name.indexOf('x-') === 0) {
-        switch (name) {
           case 'x-for':
-            x.for = value.split(/\s+in\s+/);
+            x.for = attr.value.split(/\s*in\s*/);
             break;
 
           case 'x-use':
-            x.use = value.split(/\s+with\s+/);
+            x.use = attr.value.split(/\s*with\s*/);
             break;
 
           case 'x-include':
-            node.removeAttribute(name);
-            x.use = value.split(/\s+with\s+/);
+            node.removeAttribute(attr.name);
+            x.use = attr.value.split(/\s*with\s*/);
             mixins[x.use[0]] = createVDomMapElement(node);
             includes[x.use[0]] = false;
             break;
 
           case 'x-mixin':
             node.removeAttribute(name);
-            mixins[value] = createVDomMapElement(node);
+            mixins[attr.value] = createVDomMapElement(node);
             node.remove();
             doBreak = true;
             break;
 
           default:
-            x[name.replace('x-', '')] = value;
+            x[name.replace('x-', '')] = attr.value;
         }
       } else {
-        const meta = createMeta(value, verbatim);
+        const meta = createMeta(attr.value, verbatim);
 
-        attrs[name] = {
+        attrs[attr.name] = {
+          origin: attr.value,
           text: meta.text,
           x: meta.x
         };
