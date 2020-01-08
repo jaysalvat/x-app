@@ -259,33 +259,14 @@ export default class Xapp {
     });
   }
 
-  createVDomFromMap(map, data, verbatim = false) {
+  createVDomFromMap(map, data) {
     let vDom = {
       data: function() { return data; }
     };
 
     map = clone(map);
 
-    // X-VERBATIM
-
-    if (map.x.verbatim) {
-      verbatim = this.eval(map.x.verbatim, data);
-    }
-
-    // Replace tags in attributes used
-    // by following X-attributes
-
-    if (map.attrs) {
-      const attrs = {};
-
-      each(map.attrs, (attr, key) => {
-        attrs[key] = verbatim ? attr.origin : this.replaceTags(attr.text, data, attr.x);
-      });
-
-      map.attrs = attrs;
-    }
-
-    if (!verbatim && data) {
+    if (data) {
 
       // X-FOR
 
@@ -340,6 +321,21 @@ export default class Xapp {
         if (!this.eval(map.x.if, data)) {
           return;
         }
+      }
+
+      // Replace tags in attributes used
+      // by following X-attributes
+
+      if (map.attrs) {
+        const attrs = {};
+
+        each(map.attrs, (attr, key) => {
+          const { text, x } = attr;
+
+          attrs[key] = this.replaceTags(text, data, x);
+        });
+
+        map.attrs = attrs;
       }
 
       // X-HTML
@@ -415,14 +411,15 @@ export default class Xapp {
     // NODE
 
     if (map.text) {
-      vDom = verbatim ? map.text : this.replaceTags(map.text, data, map.x);
+      vDom = this.replaceTags(map.text, data, map.x);
+
     } else if (map.tagName) {
       vDom.tagName = map.tagName;
       vDom.svg = map.svg;
       vDom.attrs = map.attrs || {};
       vDom.children = [];
 
-      // First vDom with no data needs these attributes
+      // First Vdom with no data needs these attributes
       // so they will be removed from the original DOM
       // on the first rendering
 
@@ -437,7 +434,7 @@ export default class Xapp {
 
     if (map.children) {
       each(map.children, (nodeMap) => {
-        const childMap = this.createVDomFromMap(nodeMap, data, verbatim);
+        const childMap = this.createVDomFromMap(nodeMap, data);
 
         if (isArray(childMap)) {
           each(childMap, (child) => {
@@ -458,8 +455,6 @@ export default class Xapp {
     if (!data) return string;
 
     return string.replace(RE_TAG, (_, tag) => {
-      if (!x[tag]) return string;
-
       const value = x[tag].value;
       const evalValue = this.eval(value, data);
 

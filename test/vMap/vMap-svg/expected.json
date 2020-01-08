@@ -10,7 +10,6 @@
         "svg": true,
         "attrs": {
           "d": {
-            "origin": "M10 10",
             "text": "M10 10",
             "x": {}
           }
@@ -23,17 +22,14 @@
         "svg": true,
         "attrs": {
           "cx": {
-            "origin": "10",
             "text": "10",
             "x": {}
           },
           "cy": {
-            "origin": "10",
             "text": "10",
             "x": {}
           },
           "r": {
-            "origin": "2",
             "text": "2",
             "x": {}
           }
