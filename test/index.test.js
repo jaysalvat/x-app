@@ -7,8 +7,6 @@ const html = `
 
     <div id="template-display-hidden" hidden></div>
 
-    <div id="template-display" style="display:none"></div>
-
     <ul id="template-for-1">
       <li x-for="item in items">{{ item.name }}</li>
     </ul>
@@ -163,26 +161,26 @@ describe('Xapp tests', () => {
 
     globalSettings = Xapp.settings();
 
-    expect(globalSettings).to.have.property('autoDisplay', true);
+    expect(globalSettings).to.have.property('cssPrefix', true);
 
-    Xapp.settings({ autoDisplay: false });
+    Xapp.settings({ cssPrefix: false });
     t = new Xapp('<div />');
 
     globalSettings = Xapp.settings();
     settings = t.settings();
 
-    expect(globalSettings).to.have.property('autoDisplay', false);
-    expect(settings).to.have.property('autoDisplay', false);
+    expect(globalSettings).to.have.property('cssPrefix', false);
+    expect(settings).to.have.property('cssPrefix', false);
 
-    t = new Xapp('<div />', { autoDisplay: true });
+    t = new Xapp('<div />', { cssPrefix: true });
 
     globalSettings = Xapp.settings();
     settings = t.settings();
 
-    expect(globalSettings).to.have.property('autoDisplay', false);
-    expect(settings).to.have.property('autoDisplay', true);
+    expect(globalSettings).to.have.property('cssPrefix', false);
+    expect(settings).to.have.property('cssPrefix', true);
 
-    Xapp.settings({ autoDisplay: true });
+    Xapp.settings({ cssPrefix: true });
   });
 
   it('Should add pipes', () => {
@@ -270,17 +268,10 @@ describe('Xapp tests', () => {
     expect(destination2.textContent).to.be.eql('value');
   });
 
-  it('Should autoDisplay the element', () => {
-    let t, html;
-
-    t = new Xapp('#template-display-hidden');
-    html = t.render();
+  it('Should cssPrefix the element', () => {
+    const t = new Xapp('#template-display-hidden');
+    const html = t.render();
     expect(html).to.be.eql('<div id="template-display-hidden"></div>');
-
-    Xapp.settings({ autoDisplay: 'inline-block' });
-    t = new Xapp('#template-display');
-    html = t.render();
-    expect(html).to.be.eql('<div id="template-display" style="display: inline-block;"></div>');
   });
 
   // VARS

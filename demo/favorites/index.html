@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <div id="favorites">
+  <div hidden id="favorites">
     <div class="favorites">
       <div class="favorite" x-for="user in favorites" x-if="favorites.length">
         <div class="favorite-avatar">
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <div id="users">
+  <div hidden id="users">
     <div x-use="fetch-button"></div>
 
     <div class="users loading" x-if="loading">

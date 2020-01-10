@@ -8,10 +8,6 @@ body {
   font: 1em sans-serif;
 }
 
-#users, #favorites {
-  display: none;
-}
-
 a {
   color: deepskyblue;
   cursor: pointer;

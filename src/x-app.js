@@ -23,7 +23,6 @@ export default class Xapp {
   static _mixins = {};
 
   static _settings = {
-    autoDisplay: true,
     cssPrefix: true,
     warningLevel: 1,
     beforeRender: () => {},
@@ -188,26 +187,6 @@ export default class Xapp {
     this.data = sanitize(data || this.data || {});
   }
 
-  show() {
-    const $el = this.$el;
-    const autoDisplay = this._settings.autoDisplay;
-    const computed = window.getComputedStyle($el);
-
-    if (!this.shown && !this.isContainer && autoDisplay) {
-      delete this.vMap.attrs.hidden;
-
-      if (computed.display === 'none') {
-        $el.style.display = autoDisplay === true ? 'block' : autoDisplay;
-      }
-
-      if (computed.visibility === 'hidden') {
-        $el.style.visibility = 'visible';
-      }
-
-      this.shown = true;
-    }
-  }
-
   connect($el) {
     if (isString($el)) {
       $el = document.querySelector($el);
@@ -233,6 +212,8 @@ export default class Xapp {
     this.setData(data);
     this.triggerEvent('before');
 
+    delete this.vMap.attrs.hidden;
+
     const newVDom = this.createVDomFromMap(this.vMap, this.data);
     const patch = diff(this.vDom, newVDom);
 
@@ -240,7 +221,6 @@ export default class Xapp {
     this.$el = patch(this.$el);
 
     this.applyData(this.$el, newVDom);
-    this.show();
     this.triggerEvent('after');
 
     each(this._connectors, (connector) => {
