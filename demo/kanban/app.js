@@ -124,16 +124,16 @@ function drag(e) {
 
 function drop(e) {
   const payload = JSON.parse(e.dataTransfer.getData('text/plain'));
-  const fromId = payload.fromId;
-  const toId = e.currentTarget.id;
   const task = payload.task;
-  const listTo = data.columns[toId].tasks;
-  let listFrom = data.columns[fromId].tasks;
+  const fromId = payload.fromId;
+  const fromCol = data.columns[fromId];
+  const toId = e.currentTarget.id;
+  const toCol = data.columns[toId];
 
   if (fromId === toId) return;
 
-  listFrom = listFrom.filter((item) => item.id !== task.id);
-  listTo.push(task);
+  fromCol.tasks = fromCol.tasks.filter((item) => item.id !== task.id);
+  toCol.tasks.push(task);
 
   renderAndSave();
 }
