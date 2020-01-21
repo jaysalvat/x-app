@@ -1,5 +1,5 @@
 {
-  "name": "x-app",
+  "name": "@jaysalvat/x-app",
   "version": "0.0.2",
   "description": "Smart in-place JS templating engine for micro-apps.",
   "homepage": "http://jaysalvat.com",
