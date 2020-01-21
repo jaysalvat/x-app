@@ -36,11 +36,10 @@ About 3kb+ GZipped
 
 ### Yarn install
 
-    yarn add x-app
+    yarn add @jaysalvat/x-app
 
-### Usage
+### Include from CDN
 
-```javascript
-import Template from '@jaysalvat/x-app';
+```html
+    <script src="http://unpkg.com/@jaysalvat/x-app"></script>
 ```
-
