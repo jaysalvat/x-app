@@ -1,7 +1,7 @@
 {
   "name": "@jaysalvat/x-app",
   "version": "0.0.1",
-  "description": "Smart in place JS templating engine. ",
+  "description": "Smart in-place JS templating engine for micro-apps.",
   "homepage": "http://jaysalvat.com",
   "author": "Jay Salvat",
   "license": "MIT",

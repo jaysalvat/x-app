@@ -3,7 +3,7 @@
 
 [![NPM version](https://badge.fury.io/js/%40jaysalvat%2Fx-app.svg)](http://github.com/jaysalvat/x-app)
 
-Smart in place JS templating engine.
+Smart in-place JS templating engine for micro-apps.
 About 3kb+ GZipped
 
 - [x] Virtual DOM
