@@ -338,7 +338,7 @@ export default class Xapp {
       // X-ATTR
 
       if (map.x.attr) {
-        const attrs = this.eval(map.x.attr, data);
+        const attrs = this.eval(map.x.attr, data) || [];
 
         each(attrs, (attr, key) => {
           if (attr === false || attr === undefined || attr === null) {
