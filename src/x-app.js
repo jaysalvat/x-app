@@ -441,9 +441,10 @@ export default class Xapp {
       if (!x[tag]) return string;
 
       const value = x[tag].value;
-      const evalValue = this.eval(value, data) || '';
+      const evalValue = this.eval(value, data);
+      const piped = this.applyPipes(evalValue, x[tag].pipes, data);
 
-      return this.applyPipes(evalValue, x[tag].pipes, data);
+      return typeof piped === 'undefined' ? '' : piped;
     });
   }
 
