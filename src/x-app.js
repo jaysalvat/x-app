@@ -341,7 +341,7 @@ export default class Xapp {
         const attrs = this.eval(map.x.attr, data);
 
         each(attrs, (attr, key) => {
-          if (attr === false) {
+          if (attr === false || attr === undefined || attr === null) {
             delete map.attrs[key];
           } else if (attr === true) {
             map.attrs[key] = key;
