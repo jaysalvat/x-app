@@ -441,7 +441,7 @@ export default class Xapp {
       if (!x[tag]) return string;
 
       const value = x[tag].value;
-      const evalValue = this.eval(value, data);
+      const evalValue = this.eval(value, data) || '';
 
       return this.applyPipes(evalValue, x[tag].pipes, data);
     });
