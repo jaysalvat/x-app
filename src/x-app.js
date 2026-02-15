@@ -339,6 +339,18 @@ export default class Xapp {
         }
       }
 
+      // X-SHOW
+
+      if (map.x.show) {
+        if (!map.attrs) map.attrs = {};
+        const isVisible = this.eval(map.x.show, data);
+        const currentStyle = map.attrs.style || '';
+        
+        if (!isVisible) {
+          map.attrs.style = currentStyle ? currentStyle + '; display: none' : 'display: none';
+        }
+      }
+
       // Replace tags in attributes used
       // by following X-attributes
 
