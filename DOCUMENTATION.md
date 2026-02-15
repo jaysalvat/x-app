@@ -94,27 +94,28 @@ app.mixins({
 });
 
 // Configurer globalement
-Xapp.settings({ cssPrefix: true, warningLevel: 1 });
+Xapp.settings({ cssPrefix: true, warningLevel: 1, reactive: false });
 Xapp.pipes({ customPipe: fn });
 Xapp.mixins({ customMixin: html });
 ```
 
 ## Réactivité
 
-La librairie ne fait pas la réactivité. À implémenter avec Proxies ou Object.defineProperty :
+Activez la réactivité automatique avec Proxy (désactivée par défaut) :
 
 ```javascript
-function makeReactive(obj, key, app) {
-  let val = obj[key];
-  Object.defineProperty(obj, key, {
-    get: () => val,
-    set: (value) => {
-      val = value;
-      app.render(); // Re-render
-    }
-  });
-}
+// Global
+Xapp.settings({ reactive: true });
+
+// Instance
+const app = new Xapp('#template', { reactive: true });
+app.render(data);
+
+// Les changements re-rendent automatiquement
+data.name = 'new value'; // Trigger render()
 ```
+
+*Note : Désactivée par défaut pour garder la lib légère. À utiliser quand nécessaire.*
 
 ## Inclusions
 

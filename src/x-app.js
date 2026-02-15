@@ -25,6 +25,7 @@ export default class Xapp {
   static _settings = {
     cssPrefix: true,
     warningLevel: 1,
+    reactive: false,
     beforeRender: () => {},
     afterRender: () => {}
   };
@@ -190,7 +191,22 @@ export default class Xapp {
   }
 
   setData(data) {
-    this.data = sanitize(data || this.data || {});
+    if (data !== null && data !== undefined) {
+      const sanitized = sanitize(data);
+
+      this.data = this._settings.reactive ? this.makeReactive(sanitized) : sanitized;
+    }
+  }
+
+  makeReactive(obj) {
+    return new Proxy(obj, {
+      set: (target, property, value) => {
+        if (target[property] === value) return true;
+        target[property] = value;
+        this.render();
+        return true;
+      }
+    });
   }
 
   connect($el) {
