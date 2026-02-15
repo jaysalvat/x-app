@@ -49,17 +49,11 @@ export default class Xapp {
     const { map, mixins, includes } = vMap(this.$el);
     this._mixins = extend({}, this._mixins, mixins);
     this.includes = includes;
+    this.loadIncludes();
 
     this.vMap = map;
+    this.vDom = this.createVDomFromMap(this.vMap);
     this.data = {};
-
-    // Initialize vDom immediately or after includes load
-    if (Object.keys(includes).length === 0) {
-      this.vDom = this.createVDomFromMap(this.vMap);
-    } else {
-      this.vDom = { children: [] };
-      this.loadIncludes();
-    }
   }
 
   static settings(settings) {
@@ -84,18 +78,18 @@ export default class Xapp {
   }
 
   loadIncludes(files) {
+    let i = 0;
+
     files = files || this.includes;
 
-    const fileNames = Object.keys(files).filter((fileName) => !this.includes[fileName]);
+    each(files, (_, fileName) => {
+      if (this.includes[fileName]) {
+        return;
+      } else {
+        this.includes[fileName] = true;
+      }
 
-    if (fileNames.length === 0) {
-      return Promise.resolve();
-    }
-
-    const promises = fileNames.map((fileName) => {
-      this.includes[fileName] = true;
-
-      return fetch(fileName)
+      fetch(fileName)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`Failed to load ${fileName}: ${response.status}`);
@@ -104,16 +98,22 @@ export default class Xapp {
         })
         .then((html) => {
           const { map, mixins, includes } = vMap(htmlToDom(html));
+          this.loadIncludes(includes);
           this._mixins = { ...this._mixins, ...mixins };
           this._mixins[fileName] = map;
-          return this.loadIncludes(includes);
+
+          if (++i === Object.keys(files).length) {
+            this.render();
+          }
         })
         .catch((err) => {
           this.warn(`Unable to load "${fileName}"`, err.message);
+
+          if (++i === Object.keys(files).length) {
+            this.render();
+          }
         });
     });
-
-    return Promise.all(promises).then(() => this.render());
   }
 
   settings(settings) {
