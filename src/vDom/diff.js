@@ -7,6 +7,9 @@ function diffAttrs(oldAttrs, newAttrs) {
 
   each(newAttrs, (value, key) => {
     patches.push(($node) => {
+      // Only apply attributes to Element nodes, not Text nodes
+      if ($node.nodeType !== 1) return $node;
+
       if (key === 'innerHTML') {
         $node.innerHTML = value;
       } else {
@@ -19,8 +22,10 @@ function diffAttrs(oldAttrs, newAttrs) {
   each(oldAttrs, (_, key) => {
     if (!(key in newAttrs)) {
       patches.push(($node) => {
-        $node.removeAttribute(key);
-
+        // Only remove attributes from Element nodes, not Text nodes
+        if ($node.nodeType === 1) {
+          $node.removeAttribute(key);
+        }
         return $node;
       });
     }

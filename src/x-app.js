@@ -21,6 +21,7 @@ import { RE_TAG } from './utils/constants';
 
 export default class Xapp {
   static _mixins = {};
+  static _templateCache = new Map();
 
   static _settings = {
     cssPrefix: true,
@@ -50,11 +51,18 @@ export default class Xapp {
     const { map, mixins, includes } = vMap(this.$el);
     this._mixins = extend({}, this._mixins, mixins);
     this.includes = includes;
-    this.loadIncludes();
 
     this.vMap = map;
-    this.vDom = this.createVDomFromMap(this.vMap);
     this.data = {};
+
+    // Only create initial vDom if no includes to load
+    // Otherwise vDom will be created after loadIncludes() completes
+    if (Object.keys(includes).length === 0) {
+      this.vDom = this.createVDomFromMap(this.vMap);
+    } else {
+      this.vDom = { children: [] };
+      this.loadIncludes();
+    }
   }
 
   static settings(settings) {
@@ -271,6 +279,9 @@ export default class Xapp {
 
     map = clone(map);
 
+    // Ensure map.x exists
+    if (!map.x) map.x = {};
+
     if (data) {
 
       // X-FOR
@@ -312,7 +323,7 @@ export default class Xapp {
 
         delete map.x.use;
 
-        const newData = extend(data, this.eval(`(${aliases})`, data));
+        const newData = aliases ? extend(data, this.eval(`(${aliases})`, data)) : data;
         const newMap = clone(mixin);
 
         newMap.x = Object.assign({}, mixin.x, map.x);
