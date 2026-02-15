@@ -670,6 +670,120 @@ describe('Xapp tests', () => {
 
     Promise.all([ beforePromise, afterPromise ]).then(() => done()).catch((e) => done(e));
   });
+
+  // // X-SHOW
+
+  it('Should apply X-SHOW with display:none', () => {
+    const t = new Xapp('<div><p x-show="visible">Content</p></div>');
+    const html = t.render({ visible: false });
+    expect(html).to.contain('style="display: none"');
+  });
+
+  it('Should remove display:none when x-show is true', () => {
+    const t = new Xapp('<div><p x-show="visible">Content</p></div>');
+    const html = t.render({ visible: true });
+    expect(html).to.not.contain('display: none');
+  });
+
+  it('Should preserve existing styles with x-show', () => {
+    const t = new Xapp('<div><p style="color: red" x-show="visible">Content</p></div>');
+    const html = t.render({ visible: false });
+    expect(html).to.contain('color: red');
+    expect(html).to.contain('display: none');
+  });
+
+  it('Should x-show work in loops', () => {
+    const t = new Xapp('<ul><li x-for="item in items" x-show="item.visible">{{ item.name }}</li></ul>');
+    const html = t.render({
+      items: [
+        { name: 'A', visible: true },
+        { name: 'B', visible: false },
+        { name: 'C', visible: true }
+      ]
+    });
+    expect(html).to.contain('A');
+    expect(html).to.contain('B');
+    expect(html).to.contain('C');
+    const b_count = (html.match(/display: none/g) || []).length;
+    expect(b_count).to.equal(1);
+  });
+
+  // // X-KEY
+
+  it('Should parse x-key attribute', () => {
+    const t = new Xapp('<ul><li x-for="item in items" x-key="item.id">{{ item.name }}</li></ul>');
+    const html = t.render({
+      items: [
+        { id: 1, name: 'A' },
+        { id: 2, name: 'B' }
+      ]
+    });
+    expect(html).to.contain('A');
+    expect(html).to.contain('B');
+  });
+
+  // // X-HTML
+
+  it('Should render raw HTML with x-html', () => {
+    const t = new Xapp('<div x-html="content"></div>');
+    const html = t.render({ content: '<b>Bold</b>' });
+    expect(html).to.contain('<b>Bold</b>');
+    expect(html).to.contain('Bold</b>');
+  });
+
+  it('Should x-html work in loops', () => {
+    const t = new Xapp('<ul><li x-for="item in items" x-html="item.html"></li></ul>');
+    const html = t.render({
+      items: [
+        { html: '<span>Item 1</span>' },
+        { html: '<span>Item 2</span>' }
+      ]
+    });
+    expect(html).to.contain('<span>Item 1</span>');
+    expect(html).to.contain('<span>Item 2</span>');
+  });
+
+  // // REACTIVE MODE
+
+  it('Should enable reactive mode globally', () => {
+    Xapp.settings({ reactive: false });
+    const originalReactive = Xapp.settings().reactive;
+    expect(originalReactive).to.equal(false);
+  });
+
+  it('Should enable reactive mode on instance', () => {
+    const t = new Xapp('<div><p>{{ count }}</p></div>', { reactive: true });
+    const data = { count: 0 };
+    t.render(data);
+    
+    const dom = t.getDOMObject();
+    const p = dom.querySelector('p');
+    expect(p.textContent).to.equal('0');
+  });
+
+  // // COMBINATIONS
+
+  it('Should combine x-for with x-show and x-key', () => {
+    const t = new Xapp('<ul><li x-for="item in items" x-key="item.id" x-show="item.show">{{ item.name }}</li></ul>');
+    const html = t.render({
+      items: [
+        { id: 1, name: 'Visible', show: true },
+        { id: 2, name: 'Hidden', show: false },
+        { id: 3, name: 'Visible2', show: true }
+      ]
+    });
+    expect(html).to.contain('Visible');
+    expect(html).to.contain('Hidden');
+    expect(html).to.contain('Visible2');
+    const hidden_count = (html.match(/display: none/g) || []).length;
+    expect(hidden_count).to.equal(1);
+  });
+
+  it('Should combine x-if and x-show (if takes precedence)', () => {
+    const t = new Xapp('<div><p x-if="show1" x-show="show2">Content</p></div>');
+    const html = t.render({ show1: false, show2: true });
+    expect(html).to.not.contain('Content');
+  });
 });
 
 after(() => {
@@ -677,6 +791,7 @@ after(() => {
     document.querySelector('#test').remove();
   }
 });
+
 
 // FUNCTIONS
 
