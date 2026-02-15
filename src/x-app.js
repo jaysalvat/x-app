@@ -49,11 +49,17 @@ export default class Xapp {
     const { map, mixins, includes } = vMap(this.$el);
     this._mixins = extend({}, this._mixins, mixins);
     this.includes = includes;
-    this.loadIncludes();
 
     this.vMap = map;
-    this.vDom = this.createVDomFromMap(this.vMap);
     this.data = {};
+
+    // Initialize vDom immediately or after includes load
+    if (Object.keys(includes).length === 0) {
+      this.vDom = this.createVDomFromMap(this.vMap);
+    } else {
+      this.vDom = { children: [] };
+      this.loadIncludes();
+    }
   }
 
   static settings(settings) {
@@ -78,36 +84,36 @@ export default class Xapp {
   }
 
   loadIncludes(files) {
-    let i = 0;
-
     files = files || this.includes;
 
-    each(files, (_, fileName) => {
-      if (this.includes[fileName]) {
-        return;
-      } else {
-        this.includes[fileName] = true;
-      }
+    const fileNames = Object.keys(files).filter((fileName) => !this.includes[fileName]);
 
-      const xhr = new XMLHttpRequest();
+    if (fileNames.length === 0) {
+      return Promise.resolve();
+    }
 
-      xhr.open('GET', fileName, true);
-      xhr.send();
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            const { map, mixins, includes } = vMap(htmlToDom(xhr.responseText));
-            this.loadIncludes(includes);
-            this._mixins = extend({}, this._mixins, mixins);
-            this._mixins[fileName] = map;
+    const promises = fileNames.map((fileName) => {
+      this.includes[fileName] = true;
+
+      return fetch(fileName)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to load ${fileName}: ${response.status}`);
           }
-
-          if (++i === Object.keys(files).length) {
-            this.render();
-          }
-        }
-      };
+          return response.text();
+        })
+        .then((html) => {
+          const { map, mixins, includes } = vMap(htmlToDom(html));
+          this._mixins = { ...this._mixins, ...mixins };
+          this._mixins[fileName] = map;
+          return this.loadIncludes(includes);
+        })
+        .catch((err) => {
+          this.warn(`Unable to load "${fileName}"`, err.message);
+        });
     });
+
+    return Promise.all(promises).then(() => this.render());
   }
 
   settings(settings) {
