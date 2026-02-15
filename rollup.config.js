@@ -1,4 +1,5 @@
 import filesize from 'rollup-plugin-filesize';
+import terser from '@rollup/plugin-terser';
 import pkg from './package.json' with { type: 'json' };
 
 const name = pkg.name.split('/').pop();
@@ -52,6 +53,7 @@ const minified = {
       sourcemap: watched,
       banner: !watched && bannerLight,
       plugins: [
+        terser(),
         filesize({
           showMinifiedSize: false
         })
