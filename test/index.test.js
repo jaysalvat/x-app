@@ -755,7 +755,7 @@ describe('Xapp tests', () => {
     const t = new Xapp('<div><p>{{ count }}</p></div>', { reactive: true });
     const data = { count: 0 };
     t.render(data);
-    
+
     const dom = t.getDOMObject();
     const p = dom.querySelector('p');
     expect(p.textContent).to.equal('0');
