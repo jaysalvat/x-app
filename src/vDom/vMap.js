@@ -62,6 +62,10 @@ function createVDomMapElement(node, verbatim = false) {
             x.show = value;
             break;
 
+          case 'x-key':
+            x.key = value;
+            break;
+
           default:
             x[name.replace('x-', '')] = value;
         }

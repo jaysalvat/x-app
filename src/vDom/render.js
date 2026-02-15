@@ -5,7 +5,7 @@ import { NS_SVG } from '../utils/constants';
 
 function render(vNode) {
   if (!isString(vNode)) {
-    const { tagName, attrs, children, svg } = vNode;
+    const { tagName, attrs, children, svg, x } = vNode;
     let $el;
 
     if (svg) {
@@ -17,6 +17,11 @@ function render(vNode) {
     each(attrs, (value, key) => {
       $el.setAttribute(key, value);
     });
+
+    // Store key on DOM node for diffing reference
+    if (x && x.key) {
+      $el._vDomKey = x.key;
+    }
 
     each(children, (child) => {
       $el.appendChild(render(child));

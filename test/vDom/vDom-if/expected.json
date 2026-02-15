@@ -1,17 +1,17 @@
 {
-  "tagName": "DIV",
-  "svg": false,
-  "attrs": {
-      "id": "template"
-  },
-  "children": [
-      {
-          "tagName": "DIV",
-          "svg": false,
-          "attrs": {},
-          "children": [
-              "true"
-          ]
-      }
-  ]
+    "tagName": "DIV",
+    "svg": false,
+    "attrs": {
+        "id": "template"
+    },
+    "children": [
+        {
+            "tagName": "DIV",
+            "svg": false,
+            "attrs": {},
+            "children": [
+                "true"
+            ]
+        }
+    ]
 }

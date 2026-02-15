@@ -15,6 +15,8 @@ const data = {
   var2: 'value 2',
   html: '<b>ok</b>',
   path: '/image.png',
+  showFirst: true,
+  showSecond: false,
   groups: [
     {
       name: 'group A',

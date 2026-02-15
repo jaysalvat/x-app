@@ -116,7 +116,7 @@ export default class Xapp {
           }
         })
         .catch((err) => {
-          this.warn('INCLUDE_FAILED', `Unable to load include file`, `File: ${fileName}, Error: ${err.message}`);
+          this.warn(`Unable to load \"${fileName}\":`, err.message);
 
           if (++i === Object.keys(files).length) {
             this.render();
@@ -168,7 +168,7 @@ export default class Xapp {
     }
 
     if (!$el) {
-      this.warn('SELECTOR_NOT_FOUND', `Element "${selector}" does not exist.`);
+      this.warn(`Selector \"${selector}\" does not exist.`);
       $el = document.createElement('div');
     }
 
@@ -223,11 +223,11 @@ export default class Xapp {
     }
 
     if (!$el) {
-      return this.warn('SELECTOR_NOT_FOUND', `DOM element not found`, 'Make sure the selector is valid and element exists in the DOM');
+      return this.warn('DOM element not found.');
     }
 
     if (!this.isContainer) {
-      return this.warn('INVALID_TEMPLATE', `Template must be a <script type="text/template">`, 'Ensure the template element has the correct type attribute');
+      return this.warn('Template must be type="text/template" to be connected.');
     }
 
     this._connectors.push($el);
@@ -318,7 +318,7 @@ export default class Xapp {
         const mixin = this._mixins[mixId];
 
         if (!mixin) {
-          return this.warn('MIXIN_NOT_FOUND', `Mixin/Component "${mixId}" not registered`);
+          return this.warn(`Mixin "${mixId}" not found.`);
         }
 
         delete map.x.use;
@@ -501,8 +501,7 @@ export default class Xapp {
         args = this.eval(args, data);
         value = fn.apply(data, [ value ].concat(args));
       } else {
-        const availablePipes = Object.keys(this._pipes).join(', ');
-        this.warn('PIPE_NOT_FOUND', `Filter "${name}" not found`, `Available: ${availablePipes}`);
+        this.warn(`"${name}" pipe does not exist.`);
       }
     });
 
@@ -528,42 +527,17 @@ export default class Xapp {
     try {
       return evalInContext.call(data, string);
     } catch (e) {
-      this.warn('EVAL_ERROR', `Expression evaluation failed`, `Expression: ${string}, Error: ${e.message}`);
+      this.warn(`"${string}":`, e.message);
     }
   }
 
-  warn(errorCode, message, context) {
-    // Support old format: warn(message) or new format: warn(code, message, context)
-    if (typeof errorCode !== 'string' || errorCode.match(/^[A-Z_]+$/)) {
-      // New format with error codes
-      const codes = {
-        'SELECTOR_NOT_FOUND': 'Element selector does not exist',
-        'TEMPLATE_NOT_FOUND': 'Template/Include file not found',
-        'MIXIN_NOT_FOUND': 'Mixin/Component not found',
-        'PIPE_NOT_FOUND': 'Filter/Pipe not found',
-        'EVAL_ERROR': 'Expression evaluation error',
-        'INVALID_DIRECTIVE': 'Invalid directive syntax',
-        'MISSING_ATTRIBUTE': 'Missing required attribute',
-        'INCLUDE_FAILED': 'Failed to load include file',
-        'INVALID_TEMPLATE': 'Template element must be script type="text/template"'
-      };
-
-      const description = codes[errorCode] || errorCode;
-      const fullMessage = `[${errorCode}] ${description}` +
-        (message ? ` - ${message}` : '') +
-        (context ? ` (${context})` : '');
-
-      const args = [fullMessage];
-    } else {
-      // Old format: just a message string
-      const args = Array.from(arguments);
-      var fullMessage = 'Xapp — ' + args.join(' ');
-    }
+  warn() {
+    const message = 'Xapp — ' + Array.from(arguments).join(' ');
 
     if (this._settings.warningLevel === 1) {
-      console.warn(fullMessage || 'Xapp — ' + Array.from(arguments).join(' '));
+      console.warn(message);
     } else if (this._settings.warningLevel === 2) {
-      throw Error(fullMessage || 'Xapp — ' + Array.from(arguments).join(' '));
+      throw Error(message);
     }
   }
 }

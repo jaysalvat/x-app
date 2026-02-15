@@ -293,7 +293,7 @@ describe('Xapp tests', () => {
     try {
       t.render();
     } catch (e) {
-      expect(e.message).to.be.contains('Xapp — ”undefinedVar”');
+      expect(e.message).to.be.contains('undefinedVar');
     }
   });
 

@@ -17,6 +17,8 @@ app.render(data);
 | `{{ var \| pipe }}` | Avec transformation | `{{ name \| upper }}` |
 | `x-for` | Boucle | `<div x-for="item in items">{{ item }}</div>` |
 | `x-if` | Conditionnel | `<div x-if="user.logged">Bienvenue</div>` |
+| `x-show` | Afficher/masquer (CSS) | `<div x-show="visible">Contenu</div>` |
+| `x-key` | Clé unique pour listes | `<div x-for="item in items" x-key="item.id">` |
 | `x-attr` | Attributs dynamiques | `<input x-attr="{ 'disabled': !active }">`  |
 | `x-class` | Classes dynamiques | `<div x-class="{ 'active': isActive }">` |
 | `x-style` | Styles dynamiques | `<div x-style="{ 'color': color }">` |
@@ -40,6 +42,36 @@ app.render(data);
 | `json` | Format JSON `{{ obj \| json }}` |
 
 Pipes chaînables : `{{ name | upper | truncate(20) }}`
+
+## x-show vs x-if
+
+**`x-if`** : Supprime/crée l'élément du DOM (plus lourd)
+```html
+<div x-if="showDetails">Détails visibles</div>
+```
+
+**`x-show`** : Toggle style `display: none` (mieux pour on/off fréquent)
+```html
+<div x-show="isOpen">Menu</div>
+```
+
+## x-key pour Listes
+
+Quand rendu d'une liste avec réorganisation/suppression/ajout, utilisez `x-key` pour améliorer la performance :
+
+```html
+<!-- ❌ Sans x-key (tous les items re-rendent si réorganisés) -->
+<ul>
+  <li x-for="user in users">{{ user.name }}</li>
+</ul>
+
+<!-- ✅ Avec x-key (seuls les items changés re-rendent) -->
+<ul>
+  <li x-for="user in users" x-key="user.id">{{ user.name }}</li>
+</ul>
+```
+
+La clé doit être unique par item. Utilisez une propriété stable (ID) plutôt que l'index.
 
 ## Exemple Minimal
 
