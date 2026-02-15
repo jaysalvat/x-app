@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pipes: Filters</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <p>{{ name }}</p>
+    <p>{{ name | upper }}</p>
+    <p>{{ name | lower }}</p>
+    <p>{{ name | title }}</p>
+    <p>{{ description | truncate(20) }}</p>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      name: 'john doe',
+      description: 'This is a very long description that will be truncated'
+    });
+  </script>
+</body>
+</html>

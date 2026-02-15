@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Interpolation</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <h1>{{ greeting }}, {{ name }}!</h1>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      greeting: 'Hello',
+      name: 'World'
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reactive Mode</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <p>Count: {{ count }}</p>
+    <button onclick="increment()">+</button>
+    <button onclick="decrement()">-</button>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app', { reactive: true });
+
+    const data = {
+      count: 0
+    };
+
+    window.increment = () => data.count++;
+    window.decrement = () => data.count--;
+
+    app.render(data);
+  </script>
+</body>
+</html>

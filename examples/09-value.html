@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-value: Form Input</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <input type="text" x-value="name" placeholder="Enter your name">
+    <p>Hello {{ name }}!</p>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+    const data = { name: 'World' };
+
+    app.render(data);
+
+    document.querySelector('input').addEventListener('keyup', (e) => {
+      data.name = e.target.value;
+      app.render(data);
+    });
+  </script>
+</body>
+</html>

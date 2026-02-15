@@ -10,9 +10,9 @@
 <body>
   <div hidden id="favorites">
     <div class="favorites">
-      <div class="favorite" x-for="user in favorites" x-if="favorites.length">
+      <div class="favorite" x-for="user in favorites" x-key="user.id" x-if="favorites.length">
         <div class="favorite-avatar">
-          <img x-src="user.picture.large" alt="{{ user.name.first }}  {{ user.name.last }} }}">
+          <img x-src="user.picture.large" alt="{{ user.name.first }} {{ user.name.last }}">
         </div>
         <div class="favorite-name">
           {{ user.name.first + ' ' + user.name.last | upper }}
@@ -30,7 +30,7 @@
     <div x-use="fetch-button"></div>
 
     <div class="users loading" x-if="loading">
-      <div class="user" x-for="i in Array(9).fill(null)">
+      <div class="user" x-for="i in Array(9).fill(null)" x-key="i">
           <div class="user-avatar">
             <img />
           </div>

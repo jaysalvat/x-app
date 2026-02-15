@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-key: List Keys</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <h2>Items (with x-key):</h2>
+    <ul>
+      <li x-for="item in items" x-key="item.id">
+        {{ item.name }}
+        <button onclick="removeItem(this)">Remove</button>
+      </li>
+    </ul>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+    let data = {
+      items: [
+        { id: 1, name: 'Item A' },
+        { id: 2, name: 'Item B' },
+        { id: 3, name: 'Item C' }
+      ]
+    };
+
+    window.removeItem = (elmt) => {
+      const { item } = elmt['x-data'];
+      data.items = data.items.filter(i => i.id !== item.id);
+      app.render(data);
+    };
+
+    app.render(data);
+  </script>
+</body>
+</html>

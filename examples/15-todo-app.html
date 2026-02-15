@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo App: Advanced Example</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: 50px auto; }
+    .todo { padding: 10px; border: 1px solid #ddd; margin: 5px 0; }
+    .done { text-decoration: line-through; color: #999; }
+    .active { color: green; }
+  </style>
+</head>
+<body>
+  <div id="app" hidden>
+    <h1>{{ title }}</h1>
+
+    <input type="text" id="input" placeholder="Add a todo">
+    <button onclick="addTodo()">Add</button>
+
+    <div>
+      <p>Total: {{ todos.length }} | Done: {{ doneCount }}</p>
+    </div>
+
+    <div x-for="todo in todos" x-key="todo.id" class="todo" x-class="{ 'done': todo.done, 'active': !todo.done }">
+      <input type="checkbox" x-value="todo.done" onchange="toggleTodo(this)">
+      {{ todo.text }}
+      <button onclick="removeTodo(this)" style="float: right;">Delete</button>
+    </div>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    let app = new Xapp('#app');
+    let nextId = 4;
+
+    let data = {
+      title: 'My Todo List',
+      todos: [
+        { id: 1, text: 'Learn x-app', done: true },
+        { id: 2, text: 'Build app', done: false },
+        { id: 3, text: 'Deploy', done: false }
+      ],
+      doneCount: 1
+    };
+
+    function updateDoneCount() {
+      data.doneCount = data.todos.filter(t => t.done).length;
+    }
+
+    window.addTodo = () => {
+      const input = document.getElementById('input');
+      if (input.value) {
+        data.todos.push({ id: nextId++, text: input.value, done: false });
+        input.value = '';
+        updateDoneCount();
+        app.render(data);
+      }
+    };
+
+    window.removeTodo = (elmt) => {
+      const { todo } = elmt['x-data'];
+      data.todos = data.todos.filter(t => t.id !== todo.id);
+      updateDoneCount();
+      app.render(data);
+    };
+
+    window.toggleTodo = (elmt) => {
+      const { todo } = elmt['x-data'];
+      todo.done = !todo.done;
+      updateDoneCount();
+      app.render(data);
+    };
+
+    app.render(data);
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-html: Raw HTML</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <div x-html="htmlContent"></div>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      htmlContent: '<h2>This is <strong>raw HTML</strong></h2>'
+    });
+  </script>
+</body>
+</html>

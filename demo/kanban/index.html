@@ -35,6 +35,7 @@
             draggable="true"
             x-attr="{ 'id': task.id }"
             x-for="task in column.tasks"
+            x-key="task.id"
             ondragstart="drag(event)">
 
             <i class="material-icons">drag_indicator</i>
@@ -56,6 +57,7 @@
 
       <div
         x-for="key in columns"
+        x-key="key"
         x-use="dropzone with { 'column': columns[key] }">
       </div>
     </div>

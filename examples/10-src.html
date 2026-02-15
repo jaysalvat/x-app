@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-src: Dynamic Image</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <img x-src="imageUrl" alt="Dynamic image">
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      imageUrl: 'https://placehold.co/600x400'
+    });
+  </script>
+</body>
+</html>

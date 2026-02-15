@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-show: Toggle Display</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <button onclick="toggleMenu()">Toggle Menu</button>
+
+    <div x-show="menuOpen" style="background: #f0f0f0; padding: 20px; margin-top: 10px;">
+      <p>Menu Item 1</p>
+      <p>Menu Item 2</p>
+      <p>Menu Item 3</p>
+    </div>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+    let data = { menuOpen: false };
+
+    window.toggleMenu = () => {
+      data.menuOpen = !data.menuOpen;
+      app.render(data);
+    };
+
+    app.render(data);
+  </script>
+</body>
+</html>

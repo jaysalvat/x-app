@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-style: Dynamic Styles</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <div x-style="{ 'background-color': bgColor, 'color': textColor, 'padding': '20px' }">
+      Styled text with dynamic color
+    </div>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      bgColor: '#f0f0f0',
+      textColor: '#333'
+    });
+  </script>
+</body>
+</html>

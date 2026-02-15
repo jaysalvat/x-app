@@ -344,10 +344,26 @@ export default class Xapp {
       if (map.x.show) {
         if (!map.attrs) map.attrs = {};
         const isVisible = this.eval(map.x.show, data);
-        const currentStyle = map.attrs.style || '';
 
         if (!isVisible) {
-          map.attrs.style = currentStyle ? currentStyle + '; display: none' : 'display: none';
+          // Get the current style value
+          const currentStyleObj = map.attrs.style;
+          let styleValue = '';
+
+          if (currentStyleObj) {
+            // If it's an object with { text, x }, extract text; otherwise use as-is
+            styleValue = typeof currentStyleObj === 'string' ? currentStyleObj : (currentStyleObj.text || '');
+          }
+
+          // Add display: none to the style
+          const newStyle = styleValue ? styleValue + '; display: none' : 'display: none';
+
+          // Preserve the structure: { text, x } if it was an object, otherwise just a string
+          if (currentStyleObj && typeof currentStyleObj === 'object') {
+            map.attrs.style = { text: newStyle, x: currentStyleObj.x || {} };
+          } else {
+            map.attrs.style = { text: newStyle, x: {} };
+          }
         }
       }
 
@@ -480,7 +496,7 @@ export default class Xapp {
   }
 
   replaceTags(string, data, x) {
-    if (!data) return string;
+    if (!data || !string) return string;
 
     return string.replace(RE_TAG, (_, tag) => {
       if (!x[tag]) return string;

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-use / x-mixin: Components</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <h1>{{ title }}</h1>
+
+    <div x-use="card with { title: 'Card 1', content: 'Content 1' }"></div>
+    <div x-use="card with { title: 'Card 2', content: 'Content 2' }"></div>
+
+    <template x-mixin="card">
+      <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+        <h3>{{ title }}</h3>
+        <p>{{ content }}</p>
+      </div>
+    </template>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      title: 'My Components'
+    });
+  </script>
+</body>
+</html>

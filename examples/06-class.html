@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-class: Dynamic Classes</title>
+  <style>
+    .active { color: green; font-weight: bold; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <div id="app" hidden>
+    <button x-class="{ 'active': isActive, 'error': hasError }">
+      {{ isActive ? 'Active' : 'Inactive' }}
+    </button>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      isActive: true,
+      hasError: false
+    });
+  </script>
+</body>
+</html>

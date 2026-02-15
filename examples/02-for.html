@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-for: Loops</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <h2>Users:</h2>
+    <ul>
+      <li x-for="user in users">{{ user.name }} ({{ user.age }})</li>
+    </ul>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      users: [
+        { name: 'Alice', age: 25 },
+        { name: 'Bob', age: 30 },
+        { name: 'Charlie', age: 35 }
+      ]
+    });
+  </script>
+</body>
+</html>

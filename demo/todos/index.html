@@ -20,6 +20,7 @@
       <ul class="todo-list">
         <li
           x-for="task in filterTasks(filter)"
+          x-key="task.id"
           x-class="{ 'completed': task.done, 'editing': task.editing }">
 
           <div class="view">

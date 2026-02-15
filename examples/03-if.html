@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-if: Conditionals</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <div x-if="loggedIn">
+      <p>Welcome, {{ username }}!</p>
+    </div>
+
+    <div x-if="!loggedIn">
+      <p>Please log in</p>
+    </div>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      loggedIn: true,
+      username: 'John'
+    });
+  </script>
+</body>
+</html>

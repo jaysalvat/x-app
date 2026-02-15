@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>x-attr: Dynamic Attributes</title>
+</head>
+<body>
+  <div id="app" hidden>
+    <a x-attr="{ 'href': url, 'target': '_blank', 'title': tooltip }">
+      Click me
+    </a>
+  </div>
+
+  <script src="../dist/x-app.js"></script>
+  <script>
+    const app = new Xapp('#app');
+
+    app.render({
+      url: 'https://github.com',
+      tooltip: 'Go to GitHub'
+    });
+  </script>
+</body>
+</html>
